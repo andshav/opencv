@@ -1,0 +1,10 @@
+^E:\ПОЛЕВОЙ\SHAVYRIN_A_V\PRJ\DZ1\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/Полевой/shavyrin_a_v -BE:/Полевой/shavyrin_a_v/build --check-stamp-file E:/Полевой/shavyrin_a_v/build/prj/dz1/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
