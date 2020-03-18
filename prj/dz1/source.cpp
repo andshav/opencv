@@ -4,8 +4,7 @@
 using namespace cv;
 using namespace std;
 
-int main() {
-	Mat img = imread("e://images//image.jpg");
+Mat Mozaika(string nameWindow, Mat img) {
 	Mat mainImg = Mat::zeros(img.cols * 2, img.rows * 4, CV_8UC3);
 	Mat rgbchannel[3];
 	split(img, rgbchannel);
@@ -17,7 +16,6 @@ int main() {
 	Rect rcRoi6 = Rect(img.rows * 2, img.cols, img.rows, img.cols);
 	Rect rcRoi7 = Rect(img.rows * 3, img.cols, img.rows, img.cols);
 	img.copyTo(mainImg(rcRoi1));
-	cout << rgbchannel[0].channels();
 
 	Mat rchannel;
 	Mat rchannelIn[] = { rgbchannel[2], rgbchannel[2], rgbchannel[2] };
@@ -36,7 +34,7 @@ int main() {
 
 
 	Mat r;
-	Mat rIn[] = {  Mat::zeros(img.cols,img.rows, CV_8UC1),Mat::zeros(img.cols,img.rows, CV_8UC1),rgbchannel[2] };
+	Mat rIn[] = { Mat::zeros(img.cols,img.rows, CV_8UC1),Mat::zeros(img.cols,img.rows, CV_8UC1),rgbchannel[2] };
 	merge(rIn, 3, r);
 	r.copyTo(mainImg(rcRoi5));
 
@@ -51,7 +49,20 @@ int main() {
 	b.copyTo(mainImg(rcRoi7));
 
 
-	imshow("", mainImg);
+	return mainImg;
+}
+
+int main() {
+	Mat img = imread("e://images//cubes.jpg");
+	imwrite("e://images//cubes65.jpg", img, { (int)IMWRITE_JPEG_QUALITY, 65 });
+	imwrite("e://images//cubes95.jpg", img, { (int)IMWRITE_JPEG_QUALITY, 95 });
+	Mat img65 = imread("e://images//cubes65.jpg");
+	Mat img95 = imread("e://images//cubes95.jpg");
+	Mat main65 = Mozaika("65", img65);
+	Mat main95 = Mozaika("95", img95);
+
+	imshow("", (main95 - main65)*30);
+
 	
 
 

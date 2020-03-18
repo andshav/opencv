@@ -1,3 +1,5 @@
 add_subdirectory(dz1)
 add_subdirectory(lab1.2)
 add_subdirectory(lab1.1)
+add_subdirectory(lab3)
+add_subdirectory(kr1)
